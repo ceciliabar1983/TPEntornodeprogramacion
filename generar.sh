@@ -1,36 +1,48 @@
 #!/bin/bash
-
 # Obtener la cantidad de imágenes a generar como argumento
-if [ $# -ne 1 ]; then
-	echo "Debe la pasar la cantidad de imagenes  necesarias para  generar como argumento"
-	exit 1
+                                                                                                 
+
+if [ $# -ne 1 ]; then 
+    echo "Debe pasar la cantidad de imágenes necesarias para generar como argumento"
+    exit 1
 fi
 
 cant_imagenes=$1
 sleep_interval=5
 
-# Lista de nombres de personas
+# Creo la carpeta fotos (la elimino por si existe y no está vacía y la vuelvo a generar)
+sudo rm -fr fotos 2>>/dev/null # el mensaje de error no se muestra por pantalla
+sudo mkdir fotos > /dev/null
+
+# URL del archivo de nombres
 nombre_url="https://raw.githubusercontent.com/adalessandro/EdP-2023-TP-Final/main/dict.csv"
 archivo_de_nombres="names.csv"
 
 # Descargar la lista de nombres
-wget -O "archivo_de_nombres" "$nombre_url"
+wget -O "$archivo_de_nombres" "$nombre_url"
 
+# Verificar que la descarga se realizó correctamente
+if [ $? -ne 0 ]; then
+    echo "Error al descargar el archivo de nombres"
+    exit 1
+fi
 
 # Generar y comprimir las imágenes
-for ((i=1; i<=cant_imagenes; i++)); do
-    nombre=$(sort -R "$archivo_de_nombres" | head -n 1)
+for (( i=1; i<=cant_imagenes; i++ )); do
+    nombre=$(sort -R "$archivo_de_nombres" | head -n 1) #ordeno aleatoriamente las líneas del archivo y toma la primera línea
     nombre_imagen=$(echo "$nombre" | tr ' ' '_' | tr '[:upper:]' '[:lower:]').jpg
-    wget -O "$nombre_imagen" "https://source.unsplash.com/random/900x700/?person"
-    sleep $sleep_interval	
+    wget -O "./fotos/$nombre_imagen" "https://source.unsplash.com/random/900x700/?person" #descargo la imagen y la guardo
+    sleep $sleep_interval     
 done
 
-# Generar el archivo con la suma de verificación
+imagenes_zip="images.zip"
 
+
+#Calcular la suma de verificacion
 sumaverificacion_archivo="sumaverificacion.txt"
 find . -maxdepth 1 -type f -name '*.jpg' -exec sha256sum {} \; > "$sumaverificacion_archivo"
 
 # Comprimir las imágenes
-zip -r images.zip *.jpg "$sumaverificacion_archivo"
 
+zip -r "$imagenes_zip" ./fotos/*.jpg
 
