@@ -29,20 +29,26 @@ fi
 
 # Generar y comprimir las imágenes
 for (( i=1; i<=cant_imagenes; i++ )); do
-    nombre=$(sort -R "$archivo_de_nombres" | head -n 1) #ordeno aleatoriamente las líneas del archivo y toma la primera línea
-    nombre_imagen=$(echo "$nombre" | tr ' ' '_' | tr '[:upper:]' '[:lower:]').jpg
+    nombre_imagen=$(sort -R "$archivo_de_nombres" | head -n 1).jpg #ordeno aleatoriamente las líneas del archivo y toma la primera línea
     wget -O "./fotos/$nombre_imagen" "https://source.unsplash.com/random/900x700/?person" #descargo la imagen y la guardo
     sleep $sleep_interval     
 done
 
-imagenes_zip="images.zip"
+imagenes_zip="imagenes.zip"
 
-
-#Calcular la suma de verificacion
-sumaverificacion_archivo="sumaverificacion.txt"
-find . -maxdepth 1 -type f -name '*.jpg' -exec sha256sum {} \; > "$sumaverificacion_archivo"
 
 # Comprimir las imágenes
 
 zip -r "$imagenes_zip" ./fotos/*.jpg
 
+
+#Calcular la suma de verificacion
+archivo="imagenes.zip"
+suma_verificacion=$(sha256sum "$archivo")
+echo "$suma_verificacion" > sumaverificacion.txt
+
+
+
+
+ 
+#sudo find . -maxdepth 1 -type f -name '*.jpg' -exec sha256sum {} \; > "$sumaverificacion_archivo"
