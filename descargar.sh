@@ -15,7 +15,7 @@ url_sumaverificacion=$2
 wget -0  imagenes.zip $url_imagenes
 wget -0  sumaverificacion.txt  $url_sumaverificacion
 
-# Verificamos las  suma de verificacion coicidan
+# Verificamos que las  sumas de verificacion coicidan
 suma_verificacion_imagenes_generadas=$(sha256sum --check ./imagenes.zip | cut -d " " -f 1)
 
 suma_verificacion_imagenes_descargadas=$ (cat ./sumaverificacion.txt)
