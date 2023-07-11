@@ -12,17 +12,17 @@ url_sumaverificacion=$2
 
 #Descargar la imagen comprimida y la suma de verificacion
 
-wget -0  imagenes.zip $url_imagenes
-wget -0  sumaverificacion.txt  $url_sumaverificacion
+wget -O  imagenes.zip $url_imagenes
+wget -O  sumaverificacion.txt  $url_sumaverificacion
 
-# Verificamos que las  sumas de verificacion coicidan
-suma_verificacion_imagenes_generadas=$(sha256sum --check ./imagenes.zip | cut -d " " -f 1)
+# Verificamos las  suma de verificacion coicidan
+suma_verificacion_imagenes_generadas=$(sha256sum  imagenes.zip | cut -d " " -f 1)
 
-suma_verificacion_imagenes_descargadas=$ (cat ./sumaverificacion.txt)
+suma_verificacion_imagenes_descargadas=$(cat sumaverificacion.txt)
 
-if [ $suma_verificacion_imagenes_generadas  -ne  $suma_verificacion_imagenes_descargas] ; then
-echo "las sumas de verificacion no coinciden"
-exit 1
+if [[ $suma_verificacion_imagenes_generadas =~  $suma_verificacion_imagenes_descargadas ]]; then
+        echo "las sumas de verificacion no coinciden"
+        exit 1
 else
-echo "las sumas de verificacion coinciden"
+        echo "las sumas de verificacion coinciden"
 fi
