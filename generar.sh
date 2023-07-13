@@ -7,7 +7,7 @@ fi
 cant_imagenes=$1
 sleep_interval=5
 # Creo la carpeta fotos (la elimino por si existe y no está vacía y la vuelvo a generar)
-sudo rm -fr fotos 2>>/dev/null # el mensaje de error no se muestra por pantalla
+sudo rm -fr fotos 2>/dev/null # el mensaje de error no se muestra por pantalla
 sudo mkdir fotos > /dev/null
 # URL del archivo de nombres
 nombre_url="https://raw.githubusercontent.com/adalessandro/EdP-2023-TP-Final/main/dict.csv"
@@ -28,14 +28,14 @@ for ((i=1; i<=cant_imagenes; i++)); do
 done
   
 # Comprimir las imagenes
-sudo rm -fr imagenes.zip  2>>/dev/null # El mensaje de error no se muestra por pantalla
-zip -r imagenes.zip ./fotos/*
+sudo rm -fr imagenes.zip  2>/dev/null # El mensaje de error no se muestra por pantalla
+zip -r imagenes.zip fotos
 sudo chmod +x imagenes.zip
+sudo rm -r fotos
 # Calcular la suma de verificación
 archivo="imagenes.zip"
 suma_verificacion=$(sha256sum "$archivo")
 echo "$suma_verificacion" > sumaverificacion.txt
-sudo rm -r fotos
 sudo mv imagenes.zip resultado
 sudo mv sumaverificacion.txt resultado
 
