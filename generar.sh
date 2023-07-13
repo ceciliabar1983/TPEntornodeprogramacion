@@ -30,8 +30,8 @@ done
 # Comprimir las imagenes
 sudo rm -fr imagenes.zip  2>/dev/null # El mensaje de error no se muestra por pantalla
 zip -r imagenes.zip fotos
-sudo chmod +x imagenes.zip
-sudo rm -r fotos
+sudo chmod +x imagenes.zip >/dev/null
+sudo rm -r fotos >/dev/null
 # Calcular la suma de verificación
 archivo="imagenes.zip"
 suma_verificacion=$(sha256sum "$archivo")
