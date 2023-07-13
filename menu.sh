@@ -18,8 +18,8 @@ while true; do
             source generar.sh "$cantidad"
             ;;
         2)
-            read -p "Ingrese por argumentos dos URL (una para las imágenes y otra para la suma de verificación): " url1 url2
-            source descargar.sh "$1" "$2"
+            read -p "Ingrese por argumentos dos URL (una para las imágenes y otra para la suma de verificación): " url_imagenes url_sumaverificacion
+            source descargar.sh "$url_imagenes" "$url_sumaverificacion"
             ;;
         3)
             source descomprimir.sh
