@@ -19,7 +19,7 @@ while true; do
             ;;
         2)
             read -p "Ingrese por argumentos dos URL (una para las imágenes y otra para la suma de verificación): " url1 url2
-            source descargar.sh "$url1" "$url2"
+            source descargar.sh "$1" "$2"
             ;;
         3)
             source descomprimir.sh
