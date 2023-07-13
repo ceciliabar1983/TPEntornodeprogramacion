@@ -5,9 +5,9 @@
 if [ $# -eq 2 ]; then
 #Descargar la imagen comprimida y la suma de verificacion
 
-	sudo wget $1  -O resultado/"fotos.zip"
- 	suma_verificacion_imagenes_generadas=$(sha256sum resultado/fotos.zip | tr -d " " )
-	sudo  $2 wget -O resultado/sumaverificacion.txt  
+	sudo wget  -O resultado/"imagenes.zip" $1
+ 	suma_verificacion_imagenes_generadas=$(sha256sum resultado/imagenes.zip | tr -d " " )
+	sudo  wget -O resultado/sumaverificacion.txt $2
  	suma_verificacion_imagenes_descargadas=$(cat resultado/sumaverificacion.txt) 
 
 #Verificamos que coincidan 
