@@ -4,7 +4,7 @@
 if [[ -e ./resultado/"imagenes.zip" ]]; then
         sudo unzip ./resultado/"imagenes.zip" -d resultado
         echo "Se descomprimió correctamente."
-        sudo rm -r resultado/imagenes.zip
+        sudo rm -r resultado/imagenes.zip 2>>/dev/null
 	./menu.sh
         exit 0
 
