@@ -1,5 +1,5 @@
 #Imagen de Ubuntu
-FROM ubuntu:latest
+FROM ubuntu
 
 VOLUME /var/container/TPEntorno/ProyectoEntorno/resultado
 
@@ -17,7 +17,9 @@ ADD procesar.sh /var/container/TPEntorno/ProyectoEntorno/procesar.sh
 ADD comprimir.sh /var/container/TPEntorno/ProyectoEntorno/comprimir.sh
 ADD nombres.csv /var/container/TPEntorno/ProyectoEntorno/nombres.csv
 ADD resultado /var/container/TPEntorno/ProyectoEntorno/resultado
+
 #Cambiamos la ubicacion de trabajo del Proyecto
-WORKDIR /home/entornos
+
+WORKDIR /var/container/TPEntorno/ProyectoEntorno/resultado
 #Ejecutamos el menu.sh
-CMD [ "bash", "/home/entornos/menu.sh"]
+CMD [ "bash", "/var/container/TPEntorno/ProyectoEntorno/menu.sh"]
