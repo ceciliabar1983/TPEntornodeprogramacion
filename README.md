@@ -1,1 +1,5 @@
 # TPEntornodeprogramacion
+
+RECUERDE QUE DEBE HABER UNA CARPETA CON NOMBRE "resultado" dentro de la carpeta donde se encuentra el Dockerfile. No subimos la carpeta "resultado" ya que Github no deja subir carpetas vacias. Creela antes de crear la imagen. Para crear la imagen debe ejecutar el comando sudo docker build -t tpentorno . Recuerde que debe estar dentro de la carpeta donde se encuentra el Dockerfile aqui presentado. A la hora de ejecutar la imagen deberá hacerlo con volumenes y la ejecución iterativa de la misma Esto mismo se hace con el comando: sudo docker run -it -v /carpeta/desucomputadora/:/var/container/TPentorno/ProyectoEntorno/resultado tpentorno
+O bien puede hacer pull de la imagen desde nuestro dockerhub: sudo docker pull ceciliabaronio/pentorno:v.1 
+Luego al ejecutar la imagen: sudo docker run -it -v  /carpeta/desupc:/var/container/TPentorno/ProyectoEntorno/resultado baroniocecilia/pentorno:v.1 Observe que si hace pull el nombre de la imagen cambia                                                                                                                                                 
