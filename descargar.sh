@@ -4,7 +4,8 @@
 # Verifica si se han proporcionado las dos URLs solicitadas como argumentos
 if [ $# -eq 2 ]; then
 #Descargar la imagen comprimida y la suma de verificacion
-
+	$1=url_imagenes
+ 	$2=url_sumaverificacion
 	sudo wget  -O resultado/"imagenes.zip" $1
  	suma_verificacion_imagenes_generadas=$(sha256sum resultado/imagenes.zip | tr -d " " )
 	sudo  wget -O resultado/sumaverificacion.txt $2
